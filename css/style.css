@@ -518,23 +518,21 @@ img { max-width: 100%; display: block; }
 /* =========================================================
    REVEAL ON SCROLL
 ========================================================= */
+/* Por defecto, TODO visible. Solo se oculta si JS confirma que puede animarlo. */
 .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+.js-enabled .reveal {
   opacity: 0;
   transform: translateY(24px);
   transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-.reveal.is-visible {
+.js-enabled .reveal.is-visible {
   opacity: 1;
   transform: translateY(0);
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
 }
 
 /* =========================================================
