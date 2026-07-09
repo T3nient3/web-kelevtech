@@ -143,10 +143,11 @@
   try {
     var carousel   = document.getElementById('portfolioCarousel');
     var track      = document.getElementById('carouselTrack');
+    var trackWrap  = track ? track.parentElement : null;
     var dotsWrap   = document.getElementById('carouselDots');
     var btnPrev    = document.getElementById('carouselPrev');
     var btnNext    = document.getElementById('carouselNext');
-    if (!carousel || !track) return;
+    if (!carousel || !track || !trackWrap) return;
 
     var slides     = Array.from(track.querySelectorAll('.carousel__slide'));
     var total      = slides.length;
@@ -154,6 +155,7 @@
     var autoplayMs = 4000;
     var autoplayId = null;
     var isPaused   = false;
+    var GAP        = 20; // debe coincidir con CSS gap
 
     /* ---- Crear dots ---- */
     slides.forEach(function (_, i) {
@@ -162,32 +164,49 @@
       dot.setAttribute('role', 'tab');
       dot.setAttribute('aria-label', 'Ir a diapositiva ' + (i + 1));
       dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
-      dot.setAttribute('data-dot', String(i));
       dot.addEventListener('click', function () { goTo(i); });
       dotsWrap.appendChild(dot);
     });
 
     var dots = Array.from(dotsWrap.querySelectorAll('.carousel__dot'));
 
-    /* ---- Asignar estado a cada slide ---- */
+    /* ---- Calcular offset para centrar el slide activo ---- */
+    function calcOffset(activeIdx) {
+      var wrapW     = trackWrap.clientWidth;
+      var slideW    = slides[0].offsetWidth;
+      var trackW    = total * slideW + (total - 1) * GAP;
+      // Posición izquierda del slide activo dentro del track
+      var slideLeft = activeIdx * (slideW + GAP);
+      // Queremos que el centro del slide quede en el centro del wrapper
+      var offset    = (wrapW / 2) - slideLeft - (slideW / 2);
+      return offset;
+    }
+
+    /* ---- Asignar data-state circular ---- */
     function getState(idx, active) {
       var diff = idx - active;
-      // Normalizar para loop circular
-      if (diff > total / 2)  diff -= total;
+      if (diff >  total / 2) diff -= total;
       if (diff < -total / 2) diff += total;
-
       if (diff === 0)  return 'active';
       if (diff === -1) return 'prev';
-      if (diff === 1)  return 'next';
+      if (diff ===  1) return 'next';
       if (diff === -2) return 'far-prev';
-      if (diff === 2)  return 'far-next';
+      if (diff ===  2) return 'far-next';
       return 'hidden';
     }
 
+    /* ---- Renderizar posición + estados ---- */
     function render(active) {
+      // Mover el track para centrar el slide activo
+      var offset = calcOffset(active);
+      track.style.transform = 'translateX(' + offset + 'px)';
+
+      // Actualizar data-state de cada slide
       slides.forEach(function (slide, i) {
         slide.setAttribute('data-state', getState(i, active));
       });
+
+      // Actualizar dots
       dots.forEach(function (dot, i) {
         dot.setAttribute('aria-selected', i === active ? 'true' : 'false');
       });
@@ -219,7 +238,7 @@
     btnPrev.addEventListener('click', function () { prev(); });
     btnNext.addEventListener('click', function () { next(); });
 
-    /* ---- Click en slides laterales → ir a ese slide ---- */
+    /* ---- Click en slides laterales → navegar ---- */
     slides.forEach(function (slide, i) {
       slide.addEventListener('click', function () {
         if (slide.getAttribute('data-state') !== 'active') {
@@ -229,6 +248,7 @@
     });
 
     /* ---- Teclado ---- */
+    carousel.setAttribute('tabindex', '0');
     carousel.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft')  { prev(); e.preventDefault(); }
       if (e.key === 'ArrowRight') { next(); e.preventDefault(); }
@@ -252,11 +272,15 @@
     carousel.addEventListener('touchend', function (e) {
       var dx = e.changedTouches[0].clientX - touchStartX;
       var dy = e.changedTouches[0].clientY - touchStartY;
-      // Solo activar si el swipe es más horizontal que vertical
       if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
         if (dx < 0) next();
-        else         prev();
+        else        prev();
       }
+    }, { passive: true });
+
+    /* ---- Recalcular al redimensionar ---- */
+    window.addEventListener('resize', function () {
+      render(current);
     }, { passive: true });
 
     /* ---- Init ---- */
