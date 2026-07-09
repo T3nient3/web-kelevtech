@@ -568,3 +568,273 @@ img { max-width: 100%; display: block; }
   font-size: 13px;
   color: var(--text-muted);
 }
+
+/* =========================================================
+   PORTFOLIO CAROUSEL — Premium Apple-style
+========================================================= */
+.portfolio {
+  padding: var(--section-pad) 0;
+  border-top: 1px solid var(--border);
+  overflow: hidden;
+}
+
+/* ---- Wrapper del carrusel ---- */
+.carousel {
+  position: relative;
+  width: 100%;
+  padding: 24px 0 16px;
+  user-select: none;
+}
+
+/* ---- Track exterior (visible window) ---- */
+.carousel__track-wrap {
+  overflow: visible;
+  display: flex;
+  justify-content: center;
+}
+
+/* ---- Track (contenedor real de slides) ---- */
+.carousel__track {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  /* No usamos translate en el track; cada slide se posiciona individualmente */
+}
+
+/* ---- Slide ---- */
+.carousel__slide {
+  flex: 0 0 clamp(260px, 52vw, 680px);
+  transition:
+    transform 0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    opacity   0.5s cubic-bezier(0.4, 0, 0.2, 1),
+    filter    0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform, opacity;
+  cursor: pointer;
+}
+
+/* Estado: slide activo (centro) */
+.carousel__slide[data-state="active"] {
+  transform: scale(1) translateZ(0);
+  opacity: 1;
+  z-index: 3;
+  filter: none;
+}
+
+/* Estado: slides laterales inmediatos */
+.carousel__slide[data-state="prev"],
+.carousel__slide[data-state="next"] {
+  transform: scale(0.82) translateZ(0);
+  opacity: 0.5;
+  z-index: 2;
+  filter: brightness(0.6);
+}
+
+/* Estado: slides más alejados */
+.carousel__slide[data-state="far-prev"],
+.carousel__slide[data-state="far-next"] {
+  transform: scale(0.68) translateZ(0);
+  opacity: 0.25;
+  z-index: 1;
+  filter: brightness(0.35);
+  pointer-events: none;
+}
+
+/* Estado: oculto */
+.carousel__slide[data-state="hidden"] {
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.5) translateZ(0);
+}
+
+/* ---- Card interior ---- */
+.carousel__card {
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  transition: box-shadow 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel__slide[data-state="active"] .carousel__card {
+  box-shadow:
+    0 24px 80px rgba(245, 166, 35, 0.20),
+    0 8px 32px rgba(0, 0, 0, 0.60);
+  border-color: rgba(245, 166, 35, 0.30);
+}
+
+.carousel__slide[data-state="prev"] .carousel__card,
+.carousel__slide[data-state="next"] .carousel__card {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.40);
+}
+
+/* ---- Imagen ---- */
+.carousel__img-wrap {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  overflow: hidden;
+  background: #111;
+}
+
+.carousel__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.carousel__slide[data-state="active"] .carousel__card:hover .carousel__img {
+  transform: scale(1.03);
+}
+
+/* Shimmer placeholder mientras carga la imagen */
+.carousel__img-wrap::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, #1a1a1a 25%, #242424 50%, #1a1a1a 75%);
+  background-size: 200% 100%;
+  animation: carousel-shimmer 1.4s infinite;
+  z-index: 0;
+}
+
+.carousel__img { position: relative; z-index: 1; }
+
+@keyframes carousel-shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ---- Info debajo de la imagen ---- */
+.carousel__info {
+  padding: 20px 24px 24px;
+}
+
+.carousel__tag {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 1.2px;
+  text-transform: uppercase;
+  color: var(--accent);
+  background: rgba(245, 166, 35, 0.10);
+  border: 1px solid rgba(245, 166, 35, 0.25);
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-bottom: 10px;
+}
+
+.carousel__title {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 8px;
+}
+
+.carousel__desc {
+  font-size: 13px;
+  color: var(--text-secondary);
+  line-height: 1.65;
+}
+
+/* ---- Flechas de navegación ---- */
+.carousel__arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 10;
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: rgba(18, 18, 18, 0.85);
+  border: 1px solid var(--border-strong);
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.carousel__arrow:hover {
+  background: rgba(245, 166, 35, 0.15);
+  border-color: var(--accent);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.carousel__arrow:active {
+  transform: translateY(-50%) scale(0.95);
+}
+
+.carousel__arrow svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.carousel__arrow--prev { left: max(16px, calc(50% - 380px)); }
+.carousel__arrow--next { right: max(16px, calc(50% - 380px)); }
+
+/* ---- Dots indicadores ---- */
+.carousel__dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 8px;
+  margin-top: 28px;
+  padding: 0 24px;
+}
+
+.carousel__dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: var(--border-strong);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    width 0.35s cubic-bezier(0.4, 0, 0.2, 1),
+    background 0.35s ease;
+}
+
+.carousel__dot[aria-selected="true"] {
+  width: 28px;
+  background: var(--accent);
+}
+
+.carousel__dot:hover:not([aria-selected="true"]) {
+  background: var(--text-muted);
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 768px) {
+  .carousel__slide {
+    flex: 0 0 clamp(240px, 78vw, 400px);
+  }
+
+  .carousel__arrow--prev { left: 8px; }
+  .carousel__arrow--next { right: 8px; }
+
+  .carousel__arrow {
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel__slide[data-state="prev"],
+  .carousel__slide[data-state="next"] {
+    transform: scale(0.78) translateZ(0);
+    opacity: 0.35;
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel__info { padding: 16px 18px 20px; }
+  .carousel__title { font-size: 17px; }
+}

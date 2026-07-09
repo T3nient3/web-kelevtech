@@ -137,3 +137,133 @@
     console.error('Error en formulario de contacto:', err);
   }
 })();
+
+// ===== Carrusel Premium estilo Apple =====
+(function () {
+  try {
+    var carousel   = document.getElementById('portfolioCarousel');
+    var track      = document.getElementById('carouselTrack');
+    var dotsWrap   = document.getElementById('carouselDots');
+    var btnPrev    = document.getElementById('carouselPrev');
+    var btnNext    = document.getElementById('carouselNext');
+    if (!carousel || !track) return;
+
+    var slides     = Array.from(track.querySelectorAll('.carousel__slide'));
+    var total      = slides.length;
+    var current    = 0;
+    var autoplayMs = 4000;
+    var autoplayId = null;
+    var isPaused   = false;
+
+    /* ---- Crear dots ---- */
+    slides.forEach(function (_, i) {
+      var dot = document.createElement('button');
+      dot.className = 'carousel__dot';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', 'Ir a diapositiva ' + (i + 1));
+      dot.setAttribute('aria-selected', i === 0 ? 'true' : 'false');
+      dot.setAttribute('data-dot', String(i));
+      dot.addEventListener('click', function () { goTo(i); });
+      dotsWrap.appendChild(dot);
+    });
+
+    var dots = Array.from(dotsWrap.querySelectorAll('.carousel__dot'));
+
+    /* ---- Asignar estado a cada slide ---- */
+    function getState(idx, active) {
+      var diff = idx - active;
+      // Normalizar para loop circular
+      if (diff > total / 2)  diff -= total;
+      if (diff < -total / 2) diff += total;
+
+      if (diff === 0)  return 'active';
+      if (diff === -1) return 'prev';
+      if (diff === 1)  return 'next';
+      if (diff === -2) return 'far-prev';
+      if (diff === 2)  return 'far-next';
+      return 'hidden';
+    }
+
+    function render(active) {
+      slides.forEach(function (slide, i) {
+        slide.setAttribute('data-state', getState(i, active));
+      });
+      dots.forEach(function (dot, i) {
+        dot.setAttribute('aria-selected', i === active ? 'true' : 'false');
+      });
+    }
+
+    function goTo(idx) {
+      current = ((idx % total) + total) % total;
+      render(current);
+      resetAutoplay();
+    }
+
+    function next() { goTo(current + 1); }
+    function prev() { goTo(current - 1); }
+
+    /* ---- Autoplay ---- */
+    function startAutoplay() {
+      if (autoplayId) clearInterval(autoplayId);
+      autoplayId = setInterval(function () {
+        if (!isPaused) next();
+      }, autoplayMs);
+    }
+
+    function resetAutoplay() {
+      if (autoplayId) clearInterval(autoplayId);
+      startAutoplay();
+    }
+
+    /* ---- Flechas ---- */
+    btnPrev.addEventListener('click', function () { prev(); });
+    btnNext.addEventListener('click', function () { next(); });
+
+    /* ---- Click en slides laterales → ir a ese slide ---- */
+    slides.forEach(function (slide, i) {
+      slide.addEventListener('click', function () {
+        if (slide.getAttribute('data-state') !== 'active') {
+          goTo(i);
+        }
+      });
+    });
+
+    /* ---- Teclado ---- */
+    carousel.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft')  { prev(); e.preventDefault(); }
+      if (e.key === 'ArrowRight') { next(); e.preventDefault(); }
+    });
+
+    /* ---- Pausa en hover / focus ---- */
+    carousel.addEventListener('mouseenter', function () { isPaused = true; });
+    carousel.addEventListener('mouseleave', function () { isPaused = false; });
+    carousel.addEventListener('focusin',    function () { isPaused = true; });
+    carousel.addEventListener('focusout',   function () { isPaused = false; });
+
+    /* ---- Swipe táctil ---- */
+    var touchStartX = 0;
+    var touchStartY = 0;
+
+    carousel.addEventListener('touchstart', function (e) {
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+    }, { passive: true });
+
+    carousel.addEventListener('touchend', function (e) {
+      var dx = e.changedTouches[0].clientX - touchStartX;
+      var dy = e.changedTouches[0].clientY - touchStartY;
+      // Solo activar si el swipe es más horizontal que vertical
+      if (Math.abs(dx) > Math.abs(dy) && Math.abs(dx) > 40) {
+        if (dx < 0) next();
+        else         prev();
+      }
+    }, { passive: true });
+
+    /* ---- Init ---- */
+    render(0);
+    startAutoplay();
+
+  } catch (err) {
+    console.error('Error en carrusel:', err);
+  }
+})();
