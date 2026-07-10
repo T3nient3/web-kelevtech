@@ -570,7 +570,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* =========================================================
-   PORTFOLIO CAROUSEL — Premium Apple-style
+   PORTAFOLIO CARRUSEL — Premium Apple-style
 ========================================================= */
 .portfolio {
   padding: var(--section-pad) 0;
@@ -817,14 +817,18 @@ img { max-width: 100%; display: block; }
 }
 
 /* ---- Responsive ---- */
-@media (max-width: 860px) {
-  .carousel__slide { flex: 0 0 420px; }
+    width: 40px;
+    height: 40px;
+  }
+
+  .carousel__slide[data-state="prev"],
+  .carousel__slide[data-state="next"] {
+    transform: scale(0.78) translateZ(0);
+    opacity: 0.35;
+  }
 }
 
-@media (max-width: 600px) {
-  .carousel__slide { flex: 0 0 300px; }
-  .carousel__arrow { width: 38px; height: 38px; }
-  .carousel__info { padding: 14px 16px 18px; }
-  .carousel__title { font-size: 16px; }
-  .carousel__desc { font-size: 12px; }
+@media (max-width: 480px) {
+  .carousel__info { padding: 16px 18px 20px; }
+  .carousel__title { font-size: 17px; }
 }
