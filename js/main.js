@@ -30,7 +30,7 @@
     var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
     if (prefersReducedMotion || !('IntersectionObserver' in window)) {
-      return; // se quedan visibles por defecto, sin animación
+      return;
     }
 
     document.documentElement.classList.add('js-enabled');
@@ -51,7 +51,7 @@
   }
 })();
 
-// ===== Contador animado: "Carga en 1 segundo" =====
+// ===== Contador animado: velocidad de carga =====
 (function () {
   try {
     var speedMetric = document.getElementById('speed-metric');
@@ -155,9 +155,8 @@
     var autoplayMs = 4000;
     var autoplayId = null;
     var isPaused   = false;
-    var GAP        = 20; // debe coincidir con CSS gap
+    var GAP        = 20;
 
-    /* ---- Crear dots ---- */
     slides.forEach(function (_, i) {
       var dot = document.createElement('button');
       dot.className = 'carousel__dot';
@@ -170,19 +169,14 @@
 
     var dots = Array.from(dotsWrap.querySelectorAll('.carousel__dot'));
 
-    /* ---- Calcular offset para centrar el slide activo ---- */
     function calcOffset(activeIdx) {
       var wrapW     = trackWrap.clientWidth;
       var slideW    = slides[0].offsetWidth;
-      var trackW    = total * slideW + (total - 1) * GAP;
-      // Posición izquierda del slide activo dentro del track
       var slideLeft = activeIdx * (slideW + GAP);
-      // Queremos que el centro del slide quede en el centro del wrapper
       var offset    = (wrapW / 2) - slideLeft - (slideW / 2);
       return offset;
     }
 
-    /* ---- Asignar data-state circular ---- */
     function getState(idx, active) {
       var diff = idx - active;
       if (diff >  total / 2) diff -= total;
@@ -195,18 +189,14 @@
       return 'hidden';
     }
 
-    /* ---- Renderizar posición + estados ---- */
     function render(active) {
-      // Mover el track para centrar el slide activo
       var offset = calcOffset(active);
       track.style.transform = 'translateX(' + offset + 'px)';
 
-      // Actualizar data-state de cada slide
       slides.forEach(function (slide, i) {
         slide.setAttribute('data-state', getState(i, active));
       });
 
-      // Actualizar dots
       dots.forEach(function (dot, i) {
         dot.setAttribute('aria-selected', i === active ? 'true' : 'false');
       });
@@ -221,7 +211,6 @@
     function next() { goTo(current + 1); }
     function prev() { goTo(current - 1); }
 
-    /* ---- Autoplay ---- */
     function startAutoplay() {
       if (autoplayId) clearInterval(autoplayId);
       autoplayId = setInterval(function () {
@@ -234,11 +223,9 @@
       startAutoplay();
     }
 
-    /* ---- Flechas ---- */
     btnPrev.addEventListener('click', function () { prev(); });
     btnNext.addEventListener('click', function () { next(); });
 
-    /* ---- Click en slides laterales → navegar ---- */
     slides.forEach(function (slide, i) {
       slide.addEventListener('click', function () {
         if (slide.getAttribute('data-state') !== 'active') {
@@ -247,20 +234,17 @@
       });
     });
 
-    /* ---- Teclado ---- */
     carousel.setAttribute('tabindex', '0');
     carousel.addEventListener('keydown', function (e) {
       if (e.key === 'ArrowLeft')  { prev(); e.preventDefault(); }
       if (e.key === 'ArrowRight') { next(); e.preventDefault(); }
     });
 
-    /* ---- Pausa en hover / focus ---- */
     carousel.addEventListener('mouseenter', function () { isPaused = true; });
     carousel.addEventListener('mouseleave', function () { isPaused = false; });
     carousel.addEventListener('focusin',    function () { isPaused = true; });
     carousel.addEventListener('focusout',   function () { isPaused = false; });
 
-    /* ---- Swipe táctil ---- */
     var touchStartX = 0;
     var touchStartY = 0;
 
@@ -278,12 +262,10 @@
       }
     }, { passive: true });
 
-    /* ---- Recalcular al redimensionar ---- */
     window.addEventListener('resize', function () {
       render(current);
     }, { passive: true });
 
-    /* ---- Init ---- */
     render(0);
     startAutoplay();
 

@@ -212,34 +212,6 @@ img { max-width: 100%; display: block; }
   50%      { transform: translate(-50%, -50%) scale(1.12); opacity: 1; }
 }
 
-/* pulso que nunca se detiene: "cero caídas" hecho visual */
-.hero__pulse {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 50%;
-  height: 80px;
-  transform: translateY(-50%);
-  pointer-events: none;
-  z-index: 0;
-  opacity: 0.4;
-  background-repeat: repeat-x;
-  background-size: 240px 80px;
-  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 240 80'><path d='M0 40 L55 40 L65 8 L75 72 L85 40 L150 40 L160 14 L170 66 L180 40 L240 40' fill='none' stroke='%2300C896' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/></svg>");
-  animation: pulse-scroll 6s linear infinite;
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 15%, #000 85%, transparent);
-}
-
-@keyframes pulse-scroll {
-  from { background-position-x: 0; }
-  to   { background-position-x: -240px; }
-}
-
-@media (max-width: 640px) {
-  .hero__pulse { height: 56px; background-size: 180px 56px; opacity: 0.3; }
-}
-
 .hero__pulse {
   position: absolute;
   inset: 0;
@@ -341,7 +313,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* =========================================================
-   FEATURES — se levantan y "encienden" el borde al pasar el mouse
+   FEATURES
 ========================================================= */
 .features {
   padding: var(--section-pad) 0;
@@ -416,7 +388,7 @@ img { max-width: 100%; display: block; }
 .features__grid .feature-card:nth-child(3) { transition-delay: 0.12s; }
 
 /* =========================================================
-   PRICING — la tarjeta destacada respira con un anillo animado
+   PRICING
 ========================================================= */
 .pricing {
   padding: var(--section-pad) 0;
@@ -604,6 +576,97 @@ img { max-width: 100%; display: block; }
 }
 
 /* =========================================================
+   TESTIMONIOS
+   Estructura lista para reemplazar con citas reales de clientes.
+   Cada tarjeta trae data-real="false" hasta que reemplaces el texto;
+   cámbialo a "true" cuando el testimonio sea de un cliente real.
+========================================================= */
+.testimonials {
+  padding: var(--section-pad) 0;
+  border-top: 1px solid var(--border);
+}
+
+.testimonials__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+
+@media (max-width: 860px) {
+  .testimonials__grid { grid-template-columns: 1fr; }
+}
+
+.testimonial-card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-md);
+  padding: 28px 26px;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+  transition: transform 0.3s ease, border-color 0.3s ease;
+}
+
+.testimonial-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--border-strong);
+}
+
+.testimonial-card__stars {
+  color: var(--signal);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.testimonial-card__quote {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--text-primary);
+}
+
+/* Placeholder visible SOLO en pantalla, mientras no reemplaces el texto real.
+   Bórralo (o quítale la clase) apenas cargues una cita verdadera. */
+.testimonial-card[data-real="false"] .testimonial-card__quote::after {
+  content: " — [reemplazar con cita real del cliente]";
+  color: var(--text-muted);
+  font-size: 12px;
+  font-style: italic;
+}
+
+.testimonial-card__author {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.testimonial-card__avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--bg);
+  border: 1px solid var(--border-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-weight: 700;
+  font-size: 14px;
+  color: var(--signal);
+  flex-shrink: 0;
+}
+
+.testimonial-card__name {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.testimonial-card__role {
+  font-size: 12px;
+  color: var(--text-muted);
+}
+
+/* =========================================================
    FORMULARIO / CONTACTO
 ========================================================= */
 .contact {
@@ -660,7 +723,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* =========================================================
-   REVEAL ON SCROLL — con leve escalonado
+   REVEAL ON SCROLL
 ========================================================= */
 .reveal {
   opacity: 1;
@@ -714,7 +777,7 @@ img { max-width: 100%; display: block; }
 }
 
 /* =========================================================
-   PORTAFOLIO CARRUSEL — estilo "Apple", recoloreado
+   PORTAFOLIO CARRUSEL
 ========================================================= */
 .portfolio {
   padding: var(--section-pad) 0;

@@ -85,6 +85,11 @@
       </div>
     </section>
 
+    <!-- ============================================================
+         PORTAFOLIO — proyectos reales entregados.
+         Reemplaza las rutas de assets/portfolio-*.webp por capturas
+         reales de cada sitio (recomendado 1600x900px, formato webp).
+    ============================================================= -->
     <section class="portfolio" id="portafolio">
       <div class="container">
         <div class="section-head reveal">
@@ -110,48 +115,36 @@
             <div class="carousel__slide" data-index="0">
               <div class="carousel__card">
                 <div class="carousel__img-wrap">
-                  <img src="assets/portfolio-nexo.webp" alt="Nexo Digital — Agencia Web" class="carousel__img" loading="lazy">
+                  <img src="assets/portfolio-kelevtech-seguridad.webp" alt="KelevTech Seguridad — Plataforma de seguridad inteligente" class="carousel__img" loading="lazy">
                 </div>
                 <div class="carousel__info">
-                  <span class="carousel__tag">Agencia Digital</span>
-                  <h3 class="carousel__title">Nexo Digital</h3>
-                  <p class="carousel__desc">Landing page vibrante con animaciones 3D, paleta neón y secciones de servicios optimizadas para captar leads.</p>
+                  <span class="carousel__tag">Seguridad & Software</span>
+                  <h3 class="carousel__title">KelevTech Seguridad</h3>
+                  <p class="carousel__desc">Plataforma para empresa de seguridad operativa: landing institucional, storytelling de marca y ecosistema Kelev OS.</p>
                 </div>
               </div>
             </div>
             <div class="carousel__slide" data-index="1">
               <div class="carousel__card">
                 <div class="carousel__img-wrap">
-                  <img src="assets/portfolio-arquitectura.webp" alt="Neve Arquitectos — Sitio corporativo" class="carousel__img" loading="lazy">
+                  <img src="assets/portfolio-campusteacan.webp" alt="CampusTeacan — Plataforma de formación online" class="carousel__img" loading="lazy">
                 </div>
                 <div class="carousel__info">
-                  <span class="carousel__tag">Arquitectura</span>
-                  <h3 class="carousel__title">Neve Arquitectos</h3>
-                  <p class="carousel__desc">Sitio administrable con galería de proyectos, categorías y diseño atemporal que transmite confianza y profesionalismo.</p>
+                  <span class="carousel__tag">Educación Online</span>
+                  <h3 class="carousel__title">CampusTeacan</h3>
+                  <p class="carousel__desc">Campus virtual para Corporación TEACAN: sistema de cuentas, cursos certificados y contenido formativo internacional.</p>
                 </div>
               </div>
             </div>
             <div class="carousel__slide" data-index="2">
               <div class="carousel__card">
                 <div class="carousel__img-wrap">
-                  <img src="assets/portfolio-campamento.webp" alt="Exploradores Creativos — Campamento Infantil" class="carousel__img" loading="lazy">
+                  <img src="assets/portfolio-origencloud.webp" alt="OrigenCloud — Software de proyección para iglesias" class="carousel__img" loading="lazy">
                 </div>
                 <div class="carousel__info">
-                  <span class="carousel__tag">Educación & Ocio</span>
-                  <h3 class="carousel__title">Exploradores Creativos</h3>
-                  <p class="carousel__desc">Sitio colorido y dinámico para campamento infantil con formulario de inscripción, actividades y galería multimedia.</p>
-                </div>
-              </div>
-            </div>
-            <div class="carousel__slide" data-index="3">
-              <div class="carousel__card">
-                <div class="carousel__img-wrap">
-                  <img src="assets/portfolio-bufete.webp" alt="Bufete Jurídico Alarcón — Web Legal" class="carousel__img" loading="lazy">
-                </div>
-                <div class="carousel__info">
-                  <span class="carousel__tag">Legal & Corporativo</span>
-                  <h3 class="carousel__title">Bufete Jurídico Alarcón</h3>
-                  <p class="carousel__desc">Web institucional de alto nivel con diseño elegante, perfiles de abogados, áreas de práctica y sistema de consultas.</p>
+                  <span class="carousel__tag">Software a Medida</span>
+                  <h3 class="carousel__title">OrigenCloud</h3>
+                  <p class="carousel__desc">Software de proyección de letras y versículos en tiempo real, con control multidispositivo para equipos de adoración.</p>
                 </div>
               </div>
             </div>
@@ -168,7 +161,7 @@
           <article class="feature-card reveal">
             <span class="feature-card__icon" aria-hidden="true">⚡</span>
             <p class="feature-card__metric" id="speed-metric" data-target="0.98">0.00<span>s</span></p>
-            <h3 class="feature-card__title">Carga en 2 segundo</h3>
+            <h3 class="feature-card__title">Carga en 1 segundo</h3>
             <p class="feature-card__text">Infraestructura moderna, sin el peso ni las vulnerabilidades de WordPress.</p>
           </article>
           <article class="feature-card reveal">
@@ -231,6 +224,62 @@
             </ul>
             <a href="https://wa.me/56948850047?text=Hola%2C%20me%20interesa%20el%20Plan%20Ecommerce"
                class="btn btn--ghost btn--full" target="_blank" rel="noopener">Lo quiero</a>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============================================================
+         TESTIMONIOS — placeholders marcados con data-real="false".
+         PASOS para activarlos:
+           1. Pide a un cliente real una frase corta (WhatsApp está bien).
+           2. Reemplaza el texto dentro de <p class="testimonial-card__quote">.
+           3. Cambia data-real="false" a data-real="true" en el <article>
+              (esto quita automáticamente la nota de placeholder).
+           4. Ajusta nombre, cargo/negocio e iniciales del avatar.
+         Mientras un testimonio siga en false, el navegador le agrega
+         visualmente "[reemplazar con cita real]" para que no se publique
+         sin querer como si fuera real.
+    ============================================================= -->
+    <section class="testimonials" id="testimonios">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-head__title">Lo que dicen nuestros clientes</h2>
+          <p class="section-head__text">Testimonios reales de negocios que ya trabajan con nosotros.</p>
+        </div>
+        <div class="testimonials__grid">
+          <article class="testimonial-card reveal" data-real="true">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p class="testimonial-card__quote">Muchas gracias por hacer el portal de enseñanza de mi Corporación.</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar">JS</div>
+              <div>
+                <div class="testimonial-card__name">Jonathan S.</div>
+                <div class="testimonial-card__role">Corporación / Plataforma educativa</div>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card reveal" data-real="true">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p class="testimonial-card__quote">Solo agradecer por la buena atención y el producto final.</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar">IM</div>
+              <div>
+                <div class="testimonial-card__name">Ignacio M.</div>
+                <div class="testimonial-card__role">Cliente</div>
+              </div>
+            </div>
+          </article>
+          <article class="testimonial-card reveal" data-real="true">
+            <div class="testimonial-card__stars">★★★★★</div>
+            <p class="testimonial-card__quote">Muchas gracias por fabricar el software de OrigenCloud, es una gran ayuda para nosotros como iglesia.</p>
+            <div class="testimonial-card__author">
+              <div class="testimonial-card__avatar">FG</div>
+              <div>
+                <div class="testimonial-card__name">Felipe G.</div>
+                <div class="testimonial-card__role">Iglesia / OrigenCloud</div>
+              </div>
+            </div>
           </article>
         </div>
       </div>
