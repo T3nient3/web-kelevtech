@@ -9,8 +9,6 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="css/style.css">
-
-  <!-- ===== ESTILOS DEL BOTÓN FLOTANTE DE WHATSAPP ===== -->
   <style>
     .whatsapp-float {
       position: fixed;
@@ -46,8 +44,6 @@
   </style>
 </head>
 <body>
-
-  <!-- ===== HEADER ===== -->
   <header class="header">
     <div class="container header__inner">
       <a href="#" class="logo">
@@ -63,9 +59,16 @@
   </header>
 
   <main>
-    <!-- ===== HERO ===== -->
     <section class="hero">
       <div class="hero__glow" aria-hidden="true"></div>
+      <div class="hero__pulse" aria-hidden="true">
+        <svg viewBox="0 0 2400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="hero__pulse-path" d="M0,60 L40,60 L55,30 L70,90 L85,20 L100,100 L115,60 L300,60 L340,60 L355,30 L370,90 L385,20 L400,100 L415,60 L600,60 L640,60 L655,30 L670,90 L685,20 L700,100 L715,60 L900,60 L940,60 L955,30 L970,90 L985,20 L1000,100 L1015,60 L1200,60 L1240,60 L1255,30 L1270,90 L1285,20 L1300,100 L1315,60 L1500,60 L1540,60 L1555,30 L1570,90 L1585,20 L1600,100 L1615,60 L1800,60 L1840,60 L1855,30 L1870,90 L1885,20 L1900,100 L1915,60 L2100,60 L2140,60 L2155,30 L2170,90 L2185,20 L2200,100 L2215,60 L2400,60"/>
+        </svg>
+        <svg viewBox="0 0 2400 120" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+          <path class="hero__pulse-path" d="M0,60 L40,60 L55,30 L70,90 L85,20 L100,100 L115,60 L300,60 L340,60 L355,30 L370,90 L385,20 L400,100 L415,60 L600,60 L640,60 L655,30 L670,90 L685,20 L700,100 L715,60 L900,60 L940,60 L955,30 L970,90 L985,20 L1000,100 L1015,60 L1200,60 L1240,60 L1255,30 L1270,90 L1285,20 L1300,100 L1315,60 L1500,60 L1540,60 L1555,30 L1570,90 L1585,20 L1600,100 L1615,60 L1800,60 L1840,60 L1855,30 L1870,90 L1885,20 L1900,100 L1915,60 L2100,60 L2140,60 L2155,30 L2170,90 L2185,20 L2200,100 L2215,60 L2400,60"/>
+        </svg>
+      </div>
       <div class="container hero__inner">
         <h1 class="hero__title">
           Páginas web de alto rendimiento<br class="hero__break">
@@ -82,7 +85,6 @@
       </div>
     </section>
 
-    <!-- ===== PORTAFOLIO CAROUSEL ===== -->
     <section class="portfolio" id="portafolio">
       <div class="container">
         <div class="section-head reveal">
@@ -92,7 +94,6 @@
       </div>
 
       <div class="carousel" id="portfolioCarousel" role="region" aria-label="Portafolio de proyectos">
-        <!-- Flechas -->
         <button class="carousel__arrow carousel__arrow--prev" id="carouselPrev" aria-label="Anterior">
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
             <polyline points="15 18 9 12 15 6"/>
@@ -104,10 +105,8 @@
           </svg>
         </button>
 
-        <!-- Track -->
         <div class="carousel__track-wrap">
           <div class="carousel__track" id="carouselTrack">
-
             <div class="carousel__slide" data-index="0">
               <div class="carousel__card">
                 <div class="carousel__img-wrap">
@@ -120,7 +119,6 @@
                 </div>
               </div>
             </div>
-
             <div class="carousel__slide" data-index="1">
               <div class="carousel__card">
                 <div class="carousel__img-wrap">
@@ -133,7 +131,6 @@
                 </div>
               </div>
             </div>
-
             <div class="carousel__slide" data-index="2">
               <div class="carousel__card">
                 <div class="carousel__img-wrap">
@@ -146,7 +143,6 @@
                 </div>
               </div>
             </div>
-
             <div class="carousel__slide" data-index="3">
               <div class="carousel__card">
                 <div class="carousel__img-wrap">
@@ -159,23 +155,20 @@
                 </div>
               </div>
             </div>
+          </div>
+        </div>
 
-          </div><!-- /track -->
-        </div><!-- /track-wrap -->
-
-        <!-- Dots -->
         <div class="carousel__dots" id="carouselDots" role="tablist" aria-label="Diapositivas del carrusel"></div>
       </div>
     </section>
 
-    <!-- ===== CARACTERÍSTICAS TÉCNICAS ===== -->
     <section class="features" id="tecnologia">
       <div class="container">
         <div class="features__grid">
           <article class="feature-card reveal">
             <span class="feature-card__icon" aria-hidden="true">⚡</span>
             <p class="feature-card__metric" id="speed-metric" data-target="0.98">0.00<span>s</span></p>
-            <h3 class="feature-card__title">Carga en 1 segundo</h3>
+            <h3 class="feature-card__title">Carga en 2 segundo</h3>
             <p class="feature-card__text">Infraestructura moderna, sin el peso ni las vulnerabilidades de WordPress.</p>
           </article>
           <article class="feature-card reveal">
@@ -192,7 +185,6 @@
       </div>
     </section>
 
-    <!-- ===== PLANES ===== -->
     <section class="pricing" id="planes">
       <div class="container">
         <div class="section-head reveal">
@@ -200,7 +192,6 @@
           <p class="section-head__text">Sin letra chica. Eliges, cotizas y partimos.</p>
         </div>
         <div class="pricing__grid">
-          <!-- Plan Landing -->
           <article class="plan-card reveal">
             <h3 class="plan-card__name">Plan Landing</h3>
             <p class="plan-card__price">$60.000 <span class="plan-card__currency">CLP</span></p>
@@ -214,7 +205,6 @@
                class="btn btn--ghost btn--full" target="_blank" rel="noopener">Lo quiero</a>
           </article>
 
-          <!-- Plan Administrable -->
           <article class="plan-card plan-card--featured reveal">
             <span class="plan-card__badge">Más popular</span>
             <h3 class="plan-card__name">Plan Administrable</h3>
@@ -229,7 +219,6 @@
                class="btn btn--accent btn--full" target="_blank" rel="noopener">Lo quiero</a>
           </article>
 
-          <!-- Plan Ecommerce -->
           <article class="plan-card reveal">
             <h3 class="plan-card__name">Plan Ecommerce</h3>
             <p class="plan-card__price">$299.990 <span class="plan-card__currency">CLP</span></p>
@@ -246,9 +235,40 @@
         </div>
       </div>
     </section>
+
+    <section class="contact" id="contacto">
+      <div class="container">
+        <div class="section-head reveal">
+          <h2 class="section-head__title">Cotiza tu proyecto</h2>
+          <p class="section-head__text">Cuéntanos de tu negocio y te respondemos por WhatsApp en minutos.</p>
+        </div>
+        <form class="form reveal" id="contact-form" novalidate>
+          <div class="form__field">
+            <label class="form__label" for="nombre">Nombre</label>
+            <input class="form__input" type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+          </div>
+          <div class="form__field">
+            <label class="form__label" for="telefono">Teléfono</label>
+            <input class="form__input" type="tel" id="telefono" name="telefono" placeholder="+56 9 1234 5678" required>
+          </div>
+          <div class="form__field">
+            <label class="form__label" for="negocio">Cuéntanos de tu negocio</label>
+            <textarea class="form__input form__input--textarea" id="negocio" name="negocio" placeholder="¿A qué se dedica tu negocio y qué necesitas?" required></textarea>
+          </div>
+          <button type="submit" class="btn btn--accent btn--full">Enviar por WhatsApp</button>
+          <p class="form__status" id="form-status" aria-live="polite"></p>
+        </form>
+      </div>
+    </section>
   </main>
 
-  <!-- ===== BOTÓN FLOTANTE DE WHATSAPP ===== -->
+  <footer class="footer">
+    <div class="container footer__inner">
+      <div class="footer__brand">KELEVTECH <span>Web / Studio</span></div>
+      <p class="footer__copy">© <span id="year"></span> KelevTech. Temuco, Chile.</p>
+    </div>
+  </footer>
+
   <a href="https://wa.me/56948850047?text=Hola%2C%20quiero%20cotizar%20mi%20p%C3%A1gina%20web"
      class="whatsapp-float"
      target="_blank" rel="noopener"
@@ -256,5 +276,6 @@
     <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/><path d="M12.004 2C6.478 2 2 6.478 2 12.004c0 1.99.523 3.856 1.44 5.478L2 22l4.65-1.43a9.96 9.96 0 0 0 5.354 1.44h.005c5.526 0 10.004-4.478 10.004-10.006C22.013 6.478 17.53 2 12.004 2zm0 18.006h-.004a8.28 8.28 0 0 1-4.234-1.19l-.304-.18-3.155.97.98-3.194-.199-.31a8.253 8.253 0 0 1-1.253-4.398c0-4.566 3.72-8.286 8.294-8.286 2.215 0 4.297.867 5.868 2.437a8.264 8.264 0 0 1 2.418 5.86c0 4.566-3.72 8.29-8.411 8.29z"/></svg>
   </a>
 
+  <script src="js/main.js"></script>
 </body>
 </html>
